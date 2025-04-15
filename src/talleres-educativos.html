@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="shortcut icon" href="../src/img/88965.png" type="image/x-icon">
+    <title>Taller Educativo</title>
+    <!-- Vincular Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos para la sección de Talleres Educativos */
+        .talleres {
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
+
+        .talleres-title {
+            background-image: url('../src/img/ANIMALES-EN-PELIGRO-DE-EXTINCION-EN-SLP.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .card-img-top {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .card-body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+ <!-- Barra de navegación -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: 'Roboto', sans-serif;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Zoológico del Carmen</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="sobrenosotros.html">Sobre Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="animales.html">Animales</a></li>
+          <li class="nav-item"><a class="nav-link" href="actividades.html">Actividades</a></li>
+          <li class="nav-item"><a class="nav-link" href="eventos.html">Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="galeria.html">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="visitanos.html">Visítanos</a></li>
+          <li class="nav-item"><a class="nav-link" href="ayuda.html">Ayuda</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactanos.html">Contáctanos</a></li>
+          <li class="nav-item"><a class="nav-link" href="donaciones.html">Donaciones</a></li>
+          <li class="nav-item"><a class="nav-link" href="iniciar-sesion.html">Iniciar Sesión</a></li>
+          <li class="nav-item"><a class="nav-link" href="registro.html">Registrarse</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>  
+    <!-- Sección de Talleres Educativos -->
+    <div class="container talleres py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Título con fondo de los elefantes -->
+                <h2 class="talleres-title mb-4">Talleres Educativos</h2>
+                <p>En el Zoológico del Carmen, ofrecemos una variedad de talleres educativos que permiten a los niños y adultos aprender sobre la fauna, el cuidado animal y la conservación del medio ambiente. Nuestros talleres están diseñados para ser interactivos y didácticos, promoviendo el aprendizaje a través de la experiencia directa.</p>
+
+                <h4>Tipos de Talleres:</h4>
+                <ul>
+                    <li><strong>Taller de Cuidado Animal:</strong> Aprende sobre cómo cuidar a los animales en su hábitat natural.</li>
+                    <li><strong>Taller de Conservación Ambiental:</strong> Educación sobre la importancia de preservar los ecosistemas.</li>
+                    <li><strong>Taller Infantil de Fauna:</strong> Un espacio para que los niños conozcan y aprendan sobre los animales.</li>
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="../src/img/actividades-para-trabajar-el-respeto-a-los-animales.jpg" class="card-img-top" alt="Talleres Educativos">
+                    <div class="card-body">
+                        <h5 class="card-title">Inscripción Abierta</h5>
+                        <p class="card-text">Las inscripciones para nuestros talleres educativos están abiertas todo el año. ¡No te pierdas la oportunidad de participar y aprender más sobre la fauna y el medio ambiente!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+          <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
+          <p>Visítanos en nuestras redes sociales:</p>
+          <a href="#" class="text-white me-2">Facebook</a>
+          <a href="#" class="text-white me-2">Instagram</a>
+          <a href="#" class="text-white">Twitter</a>
+        </div>
+      </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

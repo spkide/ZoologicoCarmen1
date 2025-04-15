@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="shortcut icon" href="../src/img/88965.png" type="image/x-icon">
+    <title>Galeria</title>
+    <!-- Vincular Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card img {
+            object-fit: cover;
+            height: 250px;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: 'Roboto', sans-serif;">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Zoológico del Carmen</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="sobrenosotros.html">Sobre Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="animales.html">Animales</a></li>
+                <li class="nav-item"><a class="nav-link" href="actividades.html">Actividades</a></li>
+                <li class="nav-item"><a class="nav-link" href="eventos.html">Eventos</a></li>
+                <li class="nav-item"><a class="nav-link" href="galeria.html">Galería</a></li>
+                <li class="nav-item"><a class="nav-link" href="visitanos.html">Visítanos</a></li>
+                <li class="nav-item"><a class="nav-link" href="ayuda.html">Ayuda</a></li>
+                <li class="nav-item"><a class="nav-link" href="contactanos.html">Contáctanos</a></li>
+                <li class="nav-item"><a class="nav-link" href="donaciones.html">Donaciones</a></li>
+                <li class="nav-item"><a class="nav-link" href="iniciar-sesion.html">Iniciar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="registro.html">Registrarse</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>  
+<!-- Galería de Imágenes -->
+<div class="container mt-5 mb-5">
+  <h2 class="text-center">Galería de Imágenes</h2>
+  <p class="text-center mb-4">Explora los momentos más increíbles del Zoológico del Carmen.</p>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+    <!-- Fila 1 -->
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/lights.jpg" class="card-img-top" alt="León">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/forest.jpg" class="card-img-top" alt="Elefante">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/mountains.jpg" class="card-img-top" alt="Cebra">
+      </div>
+    </div>
+
+    <!-- Fila 2 -->
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/nature.jpg" class="card-img-top" alt="Jirafa">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/snow.jpg" class="card-img-top" alt="Tigre">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/rocks.jpg" class="card-img-top" alt="Mono">
+      </div>
+    </div>
+
+    <!-- Fila 3 -->
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/rock.jpg" class="card-img-top" alt="Pavo real">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/water.jpg" class="card-img-top" alt="Flamencos">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/forest.jpg" class="card-img-top" alt="Pingüinos">
+      </div>
+    </div>
+
+    <!-- Fila 4 -->
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/mountains.jpg" class="card-img-top" alt="Lémur">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/lights.jpg" class="card-img-top" alt="Cocodrilo">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="https://www.w3schools.com/w3images/nature.jpg" class="card-img-top" alt="Camello">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <!-- Pie de página -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+        <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
+        <p>Visítanos en nuestras redes sociales:</p>
+        <a href="#" class="text-white me-2">Facebook</a>
+        <a href="#" class="text-white me-2">Instagram</a>
+        <a href="#" class="text-white">Twitter</a>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
