@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/ZoologicoCarmen.34df27b5.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="shortcut icon" href="/88965.90742777.png" type="image/x-icon">
+    <title>Donaciones</title>
+    <!-- Vincular Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: Roboto, sans-serif">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Zoológico del Carmen</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="/index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link" href="/sobrenosotros.html">Sobre Nosotros</a></li>
+              <li class="nav-item"><a class="nav-link" href="/animales.html">Animales</a></li>
+              <li class="nav-item"><a class="nav-link" href="/actividades.html">Actividades</a></li>
+              <li class="nav-item"><a class="nav-link" href="/eventos.html">Eventos</a></li>
+              <li class="nav-item"><a class="nav-link" href="/galeria.html">Galería</a></li>
+              <li class="nav-item"><a class="nav-link" href="/visitanos.html">Visítanos</a></li>
+              <li class="nav-item"><a class="nav-link" href="/ayuda.html">Ayuda</a></li>
+              <li class="nav-item"><a class="nav-link" href="/contactanos.html">Contáctanos</a></li>
+              <li class="nav-item"><a class="nav-link" href="/donaciones.html">Donaciones</a></li>
+              <li class="nav-item"><a class="nav-link" href="/iniciar-sesion.html">Iniciar Sesión</a></li>
+              <li class="nav-item"><a class="nav-link" href="/registro.html">Registrarse</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>  
+  <!-- Sección de Donaciones -->
+  <section class="mb-5" id="donaciones">
+    <h2 class="text-center mb-4">🐾 Realiza una Donación</h2>
+    <form action="https://formsubmit.co/your-email@example.com" method="POST" class="row g-3">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://tusitio.com/gracias.html">
+
+        <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="name" required="">
+        </div>
+        <div class="col-md-6">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" name="email" required="">
+        </div>
+        <div class="col-12">
+            <label for="monto" class="form-label">Monto de la Donación</label>
+            <input type="number" class="form-control" id="monto" name="amount" required="">
+        </div>
+        <div class="col-12">
+            <label for="mensaje" class="form-label">Mensaje (Opcional)</label>
+            <textarea class="form-control" id="mensaje" name="message" rows="4"></textarea>
+        </div>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Realizar Donación</button>
+        </div>
+    </form>
+</section>
+<script type="text/javascript">// Inicializar EmailJS
+emailjs.init('YOUR_USER_ID'); // Reemplaza 'YOUR_USER_ID' con tu user ID de EmailJS
+// Función para enviar correo cuando se realiza una donación
+function sendDonationEmail(event) {
+    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const amount = document.getElementById("amount").value;
+    const message = document.getElementById("message").value;
+    const templateParams = {
+        name: name,
+        email: email,
+        amount: amount,
+        message: message
+    };
+    // Enviar el correo usando EmailJS
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams).then(function(response) {
+        alert("Gracias por tu donaci\xf3n, un correo de confirmaci\xf3n ha sido enviado.");
+    }, function(error) {
+        alert('Error al enviar el correo: ' + error.text);
+    });
+}
+// Escuchar el envío del formulario
+document.getElementById('donationForm').addEventListener('submit', sendDonationEmail);
+
+</script>
+  <!-- Footer -->
+  <footer class="bg-dark text-light text-center py-3">
+    <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <footer class="bg-dark text-white text-center py-4">
+            <div class="container">
+              <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
+              <p>Visítanos en nuestras redes sociales:</p>
+              <a href="#" class="text-white me-2">Facebook</a>
+              <a href="#" class="text-white me-2">Instagram</a>
+              <a href="#" class="text-white">Twitter</a>
+            </div>
+          </footer>
+           <!-- Scripts de Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>   
+<script src="/donaciones.e5e55574.js"></script></body>
+</html>

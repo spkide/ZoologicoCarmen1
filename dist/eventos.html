@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/ZoologicoCarmen.34df27b5.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="shortcut icon" href="/88965.90742777.png" type="image/x-icon">
+    <title>Eventos</title>
+    <!-- Vincular Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: Roboto, sans-serif">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Zoológico del Carmen</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link" href="/index.html">Inicio</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/sobrenosotros.html">Sobre Nosotros</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/animales.html">Animales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/actividades.html">Actividades</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/eventos.html">Eventos</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/galeria.html">Galería</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/visitanos.html">Visítanos</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/ayuda.html">Ayuda</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/contactanos.html">Contáctanos</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/donaciones.html">Donaciones</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/iniciar-sesion.html">Iniciar Sesión</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/registro.html">Registrarse</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>  
+<!-- Dentro del <body>, después del <div class="container mt-5"> -->
+    <div class="container mt-5">
+        <h2>Próximos Eventos</h2>
+        <p>Entérate de los próximos eventos y actividades especiales en el Zoológico del Carmen.</p>
+    
+        <!-- Contador regresivo para el evento principal -->
+        <div class="alert alert-success text-center" role="alert" id="countdown">
+            El Festival de Aves Exóticas comienza en: <span id="timer"></span>
+        </div>
+    
+        <div class="row">
+            <!-- Evento 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/Aves-exoticas.6b4017b1.jpg" class="card-img-top" alt="Evento 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Festival de Aves Exóticas</h5>
+                        <p class="card-text">Ven y disfruta de una jornada dedicada a las aves más exóticas y aprende sobre su conservación.</p>
+                        <p><strong>Fecha:</strong> 20 de abril, 10:00 AM</p>
+                        <a href="#" class="btn btn-success w-100">Registrarse</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Evento 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/animales-pie-planeta-tierra_1308-128755.53b24eb6.avif" class="card-img-top" alt="Evento 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Día de la Tierra</h5>
+                        <p class="card-text">Celebra el Día de la Tierra con actividades ecológicas para toda la familia.</p>
+                        <p><strong>Fecha:</strong> 22 de abril, 11:00 AM</p>
+                        <a href="#" class="btn btn-success w-100">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Evento 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/Animales-nocturnos.db781c37.jpg" class="card-img-top" alt="Evento 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Noche de los Animales Nocturnos</h5>
+                        <p class="card-text">Explora el zoológico por la noche y conoce a las especies nocturnas.</p>
+                        <p><strong>Fecha:</strong> 27 de abril, 8:00 PM</p>
+                        <a href="#" class="btn btn-success w-100">Reserva tu lugar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Formulario de suscripción -->
+        <div class="mt-5">
+            <h4>¿Quieres enterarte de nuestros próximos eventos?</h4>
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Nombre completo" required="">
+                </div>
+                <div class="col-md-6">
+                    <input type="email" class="form-control" placeholder="Correo electrónico" required="">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Suscribirme</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+      <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+      <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
+      <p>Síguenos:</p>
+      <a href="#" class="text-white me-3">Facebook</a>
+      <a href="#" class="text-white me-3">Instagram</a>
+      <a href="#" class="text-white">TikTok</a>
+    </div>
+  </footer> 
+    
+    <!-- Agrega esto antes de cerrar el <body> -->
+    <script>// Contador regresivo
+const countdownDate = new Date("April 20, 2025 10:00:00").getTime();
+const timer = document.getElementById("timer");
+setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+    const days = Math.floor(distance / 86400000);
+    const hours = Math.floor(distance % 86400000 / 3600000);
+    const minutes = Math.floor(distance % 3600000 / 60000);
+    const seconds = Math.floor(distance % 60000 / 1000);
+    timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    if (distance < 0) timer.innerHTML = "\xa1El evento ha comenzado!";
+}, 1000);
+
+</script>    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/eventos.dc46ff4f.js"></script></body>
+</html>
