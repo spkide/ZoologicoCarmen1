@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registro - Zoológico del Carmen</title>
   <link rel="shortcut icon" href="img/88965.png" type="image/x-icon" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css" />
 </head>
@@ -27,7 +28,8 @@
         <div class="w-75">
           <h2 class="mb-4 text-center">Registro de Usuario</h2>
 
-          <form id="registroForm">
+          <!-- Formulario de registro -->
+          <form id="registroForm" action="/api/registro" method="POST">
             <div class="mb-3">
               <input type="text" name="nombre" class="form-control" placeholder="Nombre completo" required>
             </div>
@@ -37,6 +39,10 @@
             <div class="mb-3">
               <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
             </div>
+
+            <!-- ReCAPTCHA -->
+            <div class="g-recaptcha mb-3" data-sitekey="6LccJBsrAAAAAAS2B_lbio8KDFkLpuS4BXlICwWX"></div>
+
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-success">Registrarse</button>
             </div>
@@ -52,7 +58,11 @@
   </div>
 
   <!-- JS del formulario -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
   <script>
+    // Inicializa EmailJS con tu user ID
+    emailjs.init('dTvq1insZzLgAyB4c'); // Reemplaza con tu user ID de EmailJS
+
     document.getElementById('registroForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
@@ -61,9 +71,20 @@
         nombre: form.nombre.value,
         email: form.email.value,
         password: form.password.value,
+        recaptchaResponse: grecaptcha.getResponse() // Obtén la respuesta de reCAPTCHA
       };
 
+      // Verifica que reCAPTCHA haya sido completado
+      if (!data.recaptchaResponse) {
+        alert('Por favor, completa el reCAPTCHA');
+        return;
+      }
+
+      // Genera un código de verificación aleatorio
+      const codigoVerificacion = Math.floor(100000 + Math.random() * 900000); // Código aleatorio de 6 dígitos
+
       try {
+        // Registra al usuario (esto depende de tu backend)
         const res = await fetch('/api/registro', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -74,7 +95,29 @@
         alert(result.mensaje);
 
         if (result.success) {
-          window.location.href = "iniciar-sesion.html"; // Redirige al login si se registra con éxito
+          // Envia el correo con EmailJS
+          const correoData = {
+            to_email: form.email.value,
+            from_name: form.nombre.value,
+            code: codigoVerificacion,
+          };
+
+          // Enviar el correo con el código de verificación
+          emailjs.send('8rCZYFkkjrZ1sZhlV_Wy2', 'template_2z7tpyr', correoData) // Reemplaza con tu service ID y template ID
+            .then((response) => {
+              console.log('Correo enviado exitosamente:', response);
+              alert(`Se ha enviado un código de verificación a tu correo: ${form.email.value}`);
+
+              // Guardar los datos en LocalStorage
+              localStorage.setItem('email', form.email.value);
+              localStorage.setItem('codigo', codigoVerificacion);
+
+              // Redirigir a la página de verificación de código
+              window.location.href = "verificacion.html"; 
+            }, (error) => {
+              console.error('Error al enviar el correo:', error);
+              alert('Hubo un problema al enviar el código de verificación. Intenta nuevamente.');
+            });
         }
       } catch (error) {
         console.error(error);
