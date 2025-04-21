@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/css/main.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="shortcut icon" href="img/88965.png" type="image/x-icon">
-    <title>Contactanos</title>
-    <!-- Vincular Bootstrap CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="shortcut icon" href="img/88965.png" type="image/x-icon">
+  <title>Contáctanos</title>
+  <!-- Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-   <!-- Barra de navegación -->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: 'Roboto', sans-serif;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: 'Roboto', sans-serif;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Zoológico del Carmen</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -36,44 +36,63 @@
         </ul>
       </div>
     </div>
-  </nav>  
- <!-- CONTACTANOS -->
-<section class="mb-5" id="contacto">
-  <h2 class="text-center mb-4">📬 Contáctanos</h2>
-  <form action="https://formsubmit.co/tucorreo@gmail.com" method="POST" class="row g-3">
-    
-    <!-- Opciones ocultas -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://tusitio.com/gracias.html">
-    <input type="hidden" name="_template" value="table">
+  </nav>
 
-    <div class="col-md-6">
-      <label for="nombre" class="form-label">Nombre</label>
-      <input type="text" class="form-control" id="nombre" name="name" required>
+  <!-- Contáctanos -->
+  <section class="mb-5" id="contacto">
+    <h2 class="text-center mb-4">📬 Contáctanos</h2>
+    <form id="contact-form" class="row g-3">
+      <div class="col-md-6">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="user_name" required>
+      </div>
+      <div class="col-md-6">
+        <label for="correo" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="correo" name="user_email" required>
+      </div>
+      <div class="col-12">
+        <label for="mensaje" class="form-label">Mensaje</label>
+        <textarea class="form-control" id="mensaje" name="message" rows="4" required></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+      <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
+      <p>Visítanos en nuestras redes sociales:</p>
+      <a href="#" class="text-white me-2">Facebook</a>
+      <a href="#" class="text-white me-2">Instagram</a>
+      <a href="#" class="text-white">Twitter</a>
     </div>
-    <div class="col-md-6">
-      <label for="correo" class="form-label">Correo electrónico</label>
-      <input type="email" class="form-control" id="correo" name="email" required>
-    </div>
-    <div class="col-12">
-      <label for="mensaje" class="form-label">Mensaje</label>
-      <textarea class="form-control" id="mensaje" name="message" rows="4" required></textarea>
-    </div>
-    <div class="col-12 text-center">
-      <button type="submit" class="btn btn-primary">Enviar</button>
-    </div>
-  </form>
-</section>
-<footer class="bg-dark text-white text-center py-4">
-  <div class="container">
-  <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
-  <p>Visítanos en nuestras redes sociales:</p>
-  <a href="#" class="text-white me-2">Facebook</a>
-  <a href="#" class="text-white me-2">Instagram</a>
-  <a href="#" class="text-white">Twitter</a>
-  </div>
-</footer>
-<!-- Scripts de Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  </footer>
+
+  <!-- Scripts de Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("8rCZYFkkjrZ1sZhlV_Wy2"); // 🔁 Reemplaza con tu Public Key
+    })();
+
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("dTvq1insZzLgAyB4c", "template_7vl3rxx", this)
+        .then(function(response) {
+          alert("✅ Mensaje enviado correctamente");
+          document.getElementById("contact-form").reset();
+        }, function(error) {
+          alert("❌ Error al enviar el mensaje. Intenta de nuevo.");
+          console.log(error);
+        });
+    });
+  </script>
 </body>
 </html>
