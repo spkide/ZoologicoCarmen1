@@ -1,96 +1,77 @@
 // src/js/server.js
 
-const express = require('express');
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
-const fetch = require('node-fetch');       // npm install node-fetch
-const emailjs = require('emailjs-com');    // npm install emailjs-com
+const express  = require('express');
+const path     = require('path');
+const sqlite3  = require('sqlite3').verbose();
+const fs       = require('fs');
 
-const app = express();
-const PORT = 3000;
+const app      = express();
+const PORT     = 3000;
 
-// Configuración de claves
-const RECAPTCHA_SECRET_KEY = '6LccJBsrAAAAAAS2B_lbio8KDFkLpuS4BXlICwWX';
-const EMAILJS_USER_ID      = 'dTvq1insZzLgAyB4c';
-const EMAILJS_SERVICE_ID   = '8rCZYFkkjrZ1sZhlV_Wy2';
-const EMAILJS_TEMPLATE_ID  = 'template_2z7tpyr';
+// 📂 Directorio raíz de tu frontend (la carpeta `src`)
+const rootDir = path.join(__dirname, '..');
 
-// Conectar SQLite (asegúrate de que src/db/usuarios.db exista)
-const dbPath = path.join(__dirname, '..', 'db', 'usuarios.db');
+// 📁 Asegúrate de que exista la carpeta db y el archivo usuarios.db
+const dbDir  = path.join(rootDir, 'db');
+const dbPath = path.join(dbDir, 'usuarios.db');
+
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+  console.log('📁 Carpeta db creada:', dbDir);
+}
+if (!fs.existsSync(dbPath)) {
+  fs.writeFileSync(dbPath, '');
+  console.log('📄 Archivo usuarios.db creado:', dbPath);
+}
+
+// ✅ Conecta a SQLite
 const db = new sqlite3.Database(dbPath, err => {
-  if (err) {
-    console.error('❌ Error al conectar BD:', err.message);
-  } else {
-    console.log('✅ Conectado a usuarios.db');
-  }
+  if (err) console.error('❌ DB error:', err.message);
+  else    console.log('✅ Base de datos conectada:', dbPath);
 });
 
-// Middlewares
-// Servir todo lo que esté en src/ (HTML, CSS, JS, imágenes...)
-app.use(express.static(path.join(__dirname, '..')));
+// Crea la tabla si no existe
+db.run(`
+  CREATE TABLE IF NOT EXISTS usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE,
+    password TEXT
+  )
+`);
+
+// 🧾 Middlewares
+app.use(express.static(rootDir)); // sirve todo lo que está en src/
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Rutas HTML
-app.get('/',                 (req, res) => res.sendFile(path.join(__dirname, '..', 'index.html')));
-app.get('/iniciar-sesion.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'iniciar-sesion.html')));
-app.get('/registro.html',     (req, res) => res.sendFile(path.join(__dirname, '..', 'registro.html')));
-app.get('/verificacion.html', (req, res) => res.sendFile(path.join(__dirname, '..', 'verificacion.html')));
-app.get('/olvidas.html',      (req, res) => res.sendFile(path.join(__dirname, '..', 'olvidas.html')));
-
-// API: Registro con reCAPTCHA + EmailJS
-app.post('/api/registro', async (req, res) => {
-  const { nombre, email, password, 'g-recaptcha-response': recaptchaResponse } = req.body;
-
-  if (!nombre || !email || !password || !recaptchaResponse) {
-    return res.status(400).json({ success: false, mensaje: 'Faltan campos o reCAPTCHA.' });
-  }
-
-  // 1) Verificar reCAPTCHA
-  try {
-    const googleRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `secret=${RECAPTCHA_SECRET_KEY}&response=${recaptchaResponse}`,
-    });
-    const { success } = await googleRes.json();
-    if (!success) return res.status(403).json({ success: false, mensaje: 'reCAPTCHA inválido.' });
-  } catch (e) {
-    console.error('Error reCAPTCHA:', e);
-    return res.status(500).json({ success: false, mensaje: 'Error al verificar reCAPTCHA.' });
-  }
-
-  // 2) Guardar usuario en SQLite
-  db.run(
-    `INSERT INTO usuarios (nombre,email,password) VALUES (?,?,?)`,
-    [nombre, email, password],
-    function(err) {
-      if (err) {
-        console.error('Error al registrar:', err.message);
-        return res.status(500).json({ success: false, mensaje: 'Error al registrar usuario.' });
-      }
-
-      // 3) Enviar correo con código de verificación
-      const code = Math.floor(100000 + Math.random() * 900000);
-      const templateParams = { to_email: email, from_name: nombre, code };
-
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_USER_ID)
-        .then(() => {
-          res.json({
-            success: true,
-            mensaje: 'Registrado correctamente. Código enviado a tu correo.',
-            code
-          });
-        })
-        .catch(emailErr => {
-          console.error('EmailJS error:', emailErr);
-          res.status(500).json({ success: false, mensaje: 'Usuario creado, pero fallo envío de correo.' });
-        });
-    }
-  );
+// 🏠 Ruta raíz: muestra iniciar-sesion.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(rootDir, 'iniciar-sesion.html'));
 });
 
-// Levantar servidor
+// 🔑 Ruta de login (sin reCAPTCHA)
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+
+  // Validar que los campos no estén vacíos
+  if (!email || !password) {
+    return res.status(400).json({ success: false, mensaje: 'Faltan campos requeridos.' });
+  }
+
+  // Verificar credenciales en SQLite
+  const sql = 'SELECT * FROM usuarios WHERE email = ? AND password = ?';
+  db.get(sql, [email, password], (err, row) => {
+    if (err) {
+      console.error('❌ DB error:', err.message);
+      return res.status(500).json({ success: false, mensaje: 'Error en el servidor.' });
+    }
+    if (!row) {
+      return res.status(401).json({ success: false, mensaje: 'Correo o contraseña incorrectos.' });
+    }
+    res.json({ success: true, mensaje: 'Inicio de sesión exitoso.' });
+  });
+});
+
+// 🚀 Inicia el servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });

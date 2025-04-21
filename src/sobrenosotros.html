@@ -12,57 +12,75 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Formulario para recuperar contraseña -->
-    <form id="formOlvido" class="p-4">
-        <h4>¿Olvidaste tu contraseña?</h4>
-        <input type="email" id="email" class="form-control my-2" placeholder="Correo electrónico" required>
-        <button class="btn btn-primary" type="submit">Recuperar contraseña</button>
-    </form>
-  
-    <script type="module">
-        import emailjs from 'emailjs-com';
-
-        emailjs.init("dTvq1insZzLgAyB4c"); // Tu Public Key de EmailJS
-  
-        document.getElementById('formOlvido').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-          
-            const email = document.getElementById('email').value; // Obtener el valor del correo
-
-            if (!email) {
-                alert('Por favor, ingresa un correo electrónico.');
-                return;
-            }
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: 'Roboto', sans-serif;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Zoológico del Carmen</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link" href="sobrenosotros.html">Sobre Nosotros</a></li>
+              <li class="nav-item"><a class="nav-link" href="animales.html">Animales</a></li>
+              <li class="nav-item"><a class="nav-link" href="actividades.html">Actividades</a></li>
+              <li class="nav-item"><a class="nav-link" href="eventos.html">Eventos</a></li>
+              <li class="nav-item"><a class="nav-link" href="galeria.html">Galería</a></li>
+              <li class="nav-item"><a class="nav-link" href="visitanos.html">Visítanos</a></li>
+              <li class="nav-item"><a class="nav-link" href="ayuda.html">Ayuda</a></li>
+              <li class="nav-item"><a class="nav-link" href="contactanos.html">Contáctanos</a></li>
+              <li class="nav-item"><a class="nav-link" href="donaciones.html">Donaciones</a></li>
+              <li class="nav-item"><a class="nav-link" href="iniciar-sesion.html">Iniciar Sesión</a></li>
+              <li class="nav-item"><a class="nav-link" href="registro.html">Registrarse</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>  
+    <section id="sobre-nosotros" class="py-5 bg-light">
+        <div class="container">
+          <h2 class="text-center mb-4">Sobre Nosotros</h2>
+          <div class="row align-items-center">
             
-            try {
-                // Solicitar la contraseña al servidor
-                const res = await fetch('http://localhost:3000/api/recuperar', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email }) // Enviar el correo al servidor
-                });
-  
-                const data = await res.json();
-  
-                if (data.password) {
-                    // Enviar el correo con la contraseña usando EmailJS
-                    await emailjs.send('service_84s3x95', '8rCZYFkkjrZ1sZhlV_Wy2', {
-                        user_email: email,
-                        user_password: data.password
-                    });
-  
-                    alert('Correo enviado con tu contraseña.');
-                } else {
-                    alert('Correo no encontrado.');
-                }
-            } catch (err) {
-                console.error(err);
-                alert('Hubo un error al recuperar la contraseña.');
-            }
-        });
-    </script>
-
-    <!-- Cargar EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+            <!-- Imagen a la izquierda -->
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img 
+                src="img/depositphotos_76301473-stock-photo-hand-feeding-a-giraffe.jpg" 
+                alt="Familia visitando el Zoológico" 
+                class="img-fluid rounded shadow" />
+            </div>
+            
+            <!-- Texto a la derecha -->
+            <div class="col-md-6">
+              <p>Bienvenidos al <strong>Zoológico Carmen</strong>, un espacio dedicado a la conservación y al encuentro con la naturaleza. Nuestro objetivo es fomentar el amor y el respeto por la fauna silvestre, ofreciendo experiencias educativas e inolvidables para toda la familia.</p>
+              
+              <h5 class="mt-4">Nuestra Misión</h5>
+              <p>Promover la protección de especies en peligro de extinción y educar a la comunidad sobre la importancia de la biodiversidad, a través de programas interactivos y recorridos guiados.</p>
+              
+              <h5 class="mt-4">Nuestros Valores</h5>
+              <ul>
+                <li><strong>Conservación:</strong> Protegemos hábitats y especies vulnerables.</li>
+                <li><strong>Educación:</strong> Ofrecemos talleres y charlas para todas las edades.</li>
+                <li><strong>Bienestar Animal:</strong> Prioridad al cuidado y respeto de cada habitante.</li>
+                <li><strong>Responsabilidad Social:</strong> Trabajamos con la comunidad local.</li>
+              </ul>
+              
+              <div class="mt-4">
+                <a href="contactanos.html" class="btn btn-success">Contáctanos</a>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </section>
+      <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+          <p>&copy; 2025 Zoológico del Carmen. Todos los derechos reservados.</p>
+          <p>Visítanos en nuestras redes sociales:</p>
+          <a href="#" class="text-white me-2">Facebook</a>
+          <a href="#" class="text-white me-2">Instagram</a>
+          <a href="#" class="text-white">Twitter</a>
+        </div>
+      </footer>
 </body>
 </html>
