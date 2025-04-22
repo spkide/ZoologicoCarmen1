@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +58,10 @@
         <button type="submit" class="btn btn-primary">Enviar</button>
       </div>
     </form>
+    <!-- Mensaje de éxito -->
+    <div id="success-message" class="alert alert-success mt-3" style="display: none;">
+      ¡Mensaje enviado! Muchas gracias por contactarnos. Nos pondremos en contacto contigo pronto.
+    </div>
   </section>
 
   <!-- Footer -->
@@ -78,19 +82,23 @@
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     (function() {
-      emailjs.init("8rCZYFkkjrZ1sZhlV_Wy2"); // 🔁 Reemplaza con tu Public Key
+      emailjs.init("b_HAztqaLkdW3bjll"); // Tu PUBLIC KEY
     })();
 
-    document.getElementById("contact-form").addEventListener("submit", function(e) {
+    const form = document.getElementById("contact-form");
+    const successMessage = document.getElementById("success-message");
+
+    form.addEventListener("submit", function(e) {
       e.preventDefault();
 
-      emailjs.sendForm("dTvq1insZzLgAyB4c", "template_7vl3rxx", this)
+      emailjs.sendForm("service_r7mqwbg", "template_eyn77e7", this)
         .then(function(response) {
-          alert("✅ Mensaje enviado correctamente");
-          document.getElementById("contact-form").reset();
+          console.log("✅ Éxito:", response.status, response.text);
+          successMessage.style.display = "block";
+          form.reset();
         }, function(error) {
+          console.error("❌ Error:", error);
           alert("❌ Error al enviar el mensaje. Intenta de nuevo.");
-          console.log(error);
         });
     });
   </script>

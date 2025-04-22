@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="../src/css/main.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <link rel="shortcut icon" href="img/88965.png" type="image/x-icon"/>
   <title>Donaciones</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
-<body>
+<body style="font-family: 'Roboto', sans-serif;">
 
   <!-- Barra de navegación -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="font-family: 'Roboto', sans-serif;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Zoológico del Carmen</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -39,29 +39,33 @@
   </nav>
 
   <!-- Sección de Donaciones -->
-  <section class="mb-5" id="donaciones">
+  <section class="container py-5" id="donaciones">
     <h2 class="text-center mb-4">🐾 Realiza una Donación</h2>
-    <form id="donationForm" class="row g-3">
-      <div class="col-md-6">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="name" name="name" required />
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form id="donationForm" class="row g-3" action="https://www.paypal.com/donate" method="post" target="_blank">
+          <!-- Cambia value a tu cuenta de PayPal -->
+          <input type="hidden" name="business" value="tu-correo-paypal@ejemplo.com" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <div class="col-md-6">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="custom_name" placeholder="Tu nombre" required />
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" name="custom_email" placeholder="Tu correo" required />
+          </div>
+          <div class="col-12">
+            <label for="amount" class="form-label">Monto de la Donación (USD)</label>
+            <input type="number" step="0.01" class="form-control" id="amount" name="amount" placeholder="Ej. 10.00" required />
+          </div>
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Donar con PayPal</button>
+          </div>
+        </form>
       </div>
-      <div class="col-md-6">
-        <label for="email" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="email" name="email" required />
-      </div>
-      <div class="col-12">
-        <label for="amount" class="form-label">Monto de la Donación</label>
-        <input type="number" class="form-control" id="amount" name="amount" required />
-      </div>
-      <div class="col-12">
-        <label for="message" class="form-label">Mensaje (Opcional)</label>
-        <textarea class="form-control" id="message" name="message" rows="4"></textarea>
-      </div>
-      <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary">Realizar Donación</button>
-      </div>
-    </form>
+    </div>
+    <p class="text-center mt-3 text-muted">Redirigiendo a PayPal para procesar tu donación.</p>
   </section>
 
   <!-- Footer -->
@@ -77,32 +81,15 @@
 
   <!-- Scripts de Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    (function () {
-      emailjs.init('dTvq1insZzLgAyB4c'); // Tu User ID
-
-      document.getElementById('donationForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const templateParams = {
-          name: document.getElementById('name').value,
-          email: document.getElementById('email').value,
-          amount: document.getElementById('amount').value,
-          message: document.getElementById('message').value
-        };
-
-        emailjs.send('8rCZYFkkjrZ1sZhlV_Wy2', 'template_7vl3rxx', templateParams)
-          .then(function (response) {
-            alert('¡Gracias por tu donación! Hemos enviado una confirmación a tu correo.');
-            document.getElementById('donationForm').reset();
-          }, function (error) {
-            alert('Ocurrió un error al enviar el mensaje: ' + error.text);
-          });
-      });
-    })();
+    // Validación simple antes de enviar
+    document.getElementById('donationForm').addEventListener('submit', function(e) {
+      const amount = document.getElementById('amount').value;
+      if (parseFloat(amount) <= 0) {
+        e.preventDefault();
+        alert('Por favor ingresa un monto válido.');
+      }
+    });
   </script>
 </body>
 </html>
