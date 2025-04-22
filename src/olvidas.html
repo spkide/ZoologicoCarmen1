@@ -13,6 +13,8 @@
       <input type="email" id="email" class="form-control mb-3" placeholder="Correo electrónico" required />
       <button class="btn btn-primary" type="submit">Recuperar contraseña</button>
     </form>
+    <!-- Mensajes de éxito o error -->
+    <div id="feedback" class="mt-3 text-center"></div>
   </div>
 
   <!-- EmailJS -->
@@ -27,29 +29,47 @@
       e.preventDefault();
 
       const email = document.getElementById('email').value;
-
+      const feedback = document.getElementById('feedback');
+      const submitButton = e.target.querySelector('button');
+      
       // Verificamos si el correo está vacío
       if (!email) {
-        alert('Por favor ingresa un correo electrónico.');
+        feedback.textContent = 'Por favor ingresa un correo electrónico.';
+        feedback.classList.add('text-danger');
         return;
       }
+
+      // Desactivamos el botón para evitar múltiples envíos
+      submitButton.disabled = true;
+      feedback.textContent = 'Enviando...';
+      feedback.classList.remove('text-danger');
+      feedback.classList.add('text-info');
 
       try {
         // Llamamos a la API de EmailJS para enviar el correo
         const result = await emailjs.send('service_r7mqwbg', 'template_95jh5tu', {
           user_email: email,  // Correo electrónico del usuario
-          user_password: '123456' // Contraseña que quieres enviar (puedes generar una contraseñas o usar datos reales)
+          user_password: '123456' // Contraseña generada (ajustar según sea necesario)
         });
-        
+
         console.log('Correo enviado con éxito:', result);
-        alert('Correo enviado con éxito a ' + email);
-        
-        // Redirigir a la página de inicio de sesión después de enviar el correo
-        window.location.href = 'iniciar-sesion.html';  // Ajusta la ruta si es necesario
+        feedback.textContent = 'Correo enviado con éxito a ' + email;
+        feedback.classList.remove('text-info');
+        feedback.classList.add('text-success');
+
+        // Redirigir a la página de inicio de sesión después de un breve delay
+        setTimeout(() => {
+          window.location.href = 'iniciar-sesion.html';  // Ajusta la ruta si es necesario
+        }, 2000);
 
       } catch (error) {
         console.error('Error al enviar el correo:', error);
-        alert('Hubo un error al enviar el correo. Intenta nuevamente.');
+        feedback.textContent = 'Hubo un error al enviar el correo. Intenta nuevamente.';
+        feedback.classList.remove('text-info');
+        feedback.classList.add('text-danger');
+      } finally {
+        // Volver a habilitar el botón
+        submitButton.disabled = false;
       }
     });
   </script>  
